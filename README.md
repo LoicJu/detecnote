@@ -1,6 +1,7 @@
 # detecNote
 Cours de traitement d'image
-He-arc 2020
+
+He-Arc 2020
 
 François Bouthillier de Beaumont - Roxane Carraux - Loïc Jurasz
 
