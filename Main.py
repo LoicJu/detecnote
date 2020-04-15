@@ -21,7 +21,7 @@ def analyse(img):
     for line in lines:
         pt1 = (line[0][0],line[0][1])
         pt2 = (line[0][2],line[0][3])
-        cv2.line(img, pt1, pt2, (255,255,255), 2)
+        cv2.line(img, pt1, pt2, (0,0,255), 2)
     
     '''
     circles = cv2.HoughCircles(img,cv2.HOUGH_GRADIENT,1,20,param1=50,param2=30,minRadius=0,maxRadius=0)
