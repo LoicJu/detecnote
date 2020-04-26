@@ -266,4 +266,8 @@ if __name__ == "__main__":
     filenames = [img for img in glob.glob("Images/*.png")]
     for f1 in filenames:
         img = cv2.imread(f1)
-        analyse(img, f1)
+        txt = f1.split('\\', 1)
+        txt = txt[1].split('.')
+        txt = txt[0]
+        txt  = "Resultat\\" + txt
+        analyse(img, txt)
