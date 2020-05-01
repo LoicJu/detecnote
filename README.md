@@ -22,6 +22,6 @@ On efface ensuite les lignes pour qu'on ait plus que les notes.
 
 Nous détectons ensuite les contours entre les limites définies. Une fois que nous avons toutes nos notes dans notre liste de contours, on peut les trier de gauche à droite pour les avoir dans l'ordre de lecture.
 
-Nous vérifions ensuite où se situe la note par rapport à nos lignes horizontales.
+Nous vérifions ensuite où se situe la note par rapport à nos lignes horizontales et si une petite ligne verticale en est proche.
 
-Nous n'utilisons pas les petites lignes verticales actuellement, elles peuvent être utilisées afin de déterminer si la note est une ronde ou une blanche/noire
+Nous écrivons ensuite dans un fichier txt les notes que nous avons repérées. Nous écrivons également avant la note (r) ou (n/b) pour dire si la note est une ronde (r) ou une blanhe/noir (n/b)
