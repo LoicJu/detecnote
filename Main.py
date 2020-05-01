@@ -130,7 +130,7 @@ def analyse(img, nameimg):
     # order contours_notes from right to left
     contours_notes.sort(key=takeX, reverse=True)
     # we create an array with the notes in it
-    notes = ['Do','Re','Mi','Fa','Sol','La','Si']
+    notes = ['Do ','Re ','Mi ','Fa ','Sol ','La ','Si ']
     # we can know which note is which with the lines, we know that the long lines are grouped by 5
     lines = []
     for i in range(0, len(cnts_hor)-1, +5):
@@ -169,30 +169,47 @@ def analyse(img, nameimg):
                 cnts_hor_littles.insert(i+5,line_to_add_above)
             # if the note is between the 5 lines + and - 15 is to take the notes that are just above or under the line
             if c2[0][0][1]<underLine+15 and c2[0][0][1]>aboveLine-15:
-                # each point in the note
+                # we put this variable that will help us locate the note
                 above = 0
                 # if it's on the line
-                on_line = False   
+                on_line = False 
+                # if the note has a vertical line
+                has_vert_line = False 
                 # we parcour the lines 
                 for j in range(0, nbLines):
                     above_the_line = False
                     under_the_line = False 
                     # we parcour all the points in the contours to compare to the line in order to know if it's above and under the line (if it's on the line)       
                     for c3 in c2:
+                        # we test if the contour is under the line
                         if c3[0][1]>cnts_hor_littles[j+i][0][0][1]:
                             under_the_line = True
+                        # we test if the contour is above the line
                         if c3[0][1]<cnts_hor_littles[j+i][0][0][1]:
                             above_the_line = True
+                        # if it's under and above, it's on the line
                         if under_the_line and above_the_line:
                             on_line = True
+                        # test all the contour of little vertical line
+                        for v1 in cnts_ver_short_final :
+                            # test if the vert line is between the lines
+                            if v1[0][0][1]<underLine+15 and v1[0][0][1]>aboveLine-15:
+                                # test if the note and the vertical lines are close enough
+                                if abs(c3[0][0]-v1[0][0][0]) < 10:
+                                    has_vert_line = True
                     if c2[0][0][1]<cnts_hor_littles[j+i][0][0][1]:
                        above += 1 
                 # write in lines what notes it is
                 # ['Do','Re','Mi','Fa','Sol','La','Si']
+
                 if on_line:
                     lines.append(notes[(2*above-2*nbLinesUnder)%7]) 
                 else:
-                    lines.append(notes[(2*above-2*nbLinesUnder+1)%7])                       
+                    lines.append(notes[(2*above-2*nbLinesUnder+1)%7])
+                if has_vert_line:
+                    lines.append('(n/b)')
+                else:
+                    lines.append('(r)')                
             if insert_above:
                 cnts_hor_littles.pop(i+5)
             if insert_under:
@@ -201,7 +218,7 @@ def analyse(img, nameimg):
     # write in file what are the notes
     f= open(nameimg + ".txt","w+")
     for n in lines:
-        f.write(n + " ")
+        f.write(n)
     f.close()
 
     if show_image:
