@@ -13,7 +13,8 @@ import glob
 import sys
 import numpy as np
 
-show_image = True
+
+show_image = False
 
 def takeX(elem):
     return elem[0][0][0]
@@ -128,6 +129,8 @@ def analyse(img, nameimg):
     contours_notes, hierarchy = cv2.findContours(result_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     # order contours_notes from right to left
     contours_notes.sort(key=takeX, reverse=True)
+    # we create an array with the notes in it
+    notes = ['Do','Re','Mi','Fa','Sol','La','Si']
     # we can know which note is which with the lines, we know that the long lines are grouped by 5
     lines = []
     for i in range(0, len(cnts_hor)-1, +5):
@@ -138,6 +141,7 @@ def analyse(img, nameimg):
         for c2 in contours_notes:
             # need to check for little lines, above or under the 5 principal lines
             nbLines = 5
+            nbLinesUnder = 0
             aboveLine = cnts_hor[i+4][0][0][1]
             line_to_add_above = cnts_hor[i+4]
             underLine = cnts_hor[i][0][0][1]
@@ -152,6 +156,7 @@ def analyse(img, nameimg):
                     insert_under = True
             if insert_under:
                 nbLines += 1
+                nbLinesUnder += 1
                 cnts_hor_littles.insert(i,line_to_add_below)
              # above
             for clittles in cnts_hor_short:
@@ -183,66 +188,11 @@ def analyse(img, nameimg):
                     if c2[0][0][1]<cnts_hor_littles[j+i][0][0][1]:
                        above += 1 
                 # write in lines what notes it is
-                # if insert under OR under and above
-                if insert_under:
-                    if on_line:
-                        if above == 1:
-                            lines.append('Do')
-                        if above == 2:
-                            lines.append('Mi')
-                        if above == 3:
-                            lines.append('Sol')
-                        if above == 4:
-                            lines.append('Si')
-                        if above == 5:
-                            lines.append('Re')
-                        if above == 6:
-                            lines.append('Fa')
-                        if above == 7:
-                            lines.append('La')
-                    else:                      
-                        if above == 1:
-                            lines.append('Re')
-                        if above == 2:
-                            lines.append('Fa')
-                        if above == 3:
-                            lines.append('La')
-                        if above == 4:
-                            lines.append('Do')
-                        if above == 5:
-                            lines.append('Mi')
-                        if above == 6:
-                            lines.append('Sol')
-                        if above == 7:
-                            lines.append('Si')
+                # ['Do','Re','Mi','Fa','Sol','La','Si']
+                if on_line:
+                    lines.append(notes[(2*above-2*nbLinesUnder)%7]) 
                 else:
-                    if on_line:
-                        if above == 0:
-                            lines.append('Mi')
-                        if above == 1:
-                            lines.append('Sol')
-                        if above == 2:
-                            lines.append('Si')
-                        if above == 3:
-                            lines.append('Re')
-                        if above == 4:
-                            lines.append('Fa')
-                        if above == 5:
-                            lines.append('La')
-                    else:                      
-                        if above == 0:
-                            lines.append('Re')
-                        if above == 1:
-                            lines.append('Fa')
-                        if above == 2:
-                            lines.append('La')
-                        if above == 3:
-                            lines.append('Do')
-                        if above == 4:
-                            lines.append('Mi')
-                        if above == 5:
-                            lines.append('Sol')
-
+                    lines.append(notes[(2*above-2*nbLinesUnder+1)%7])                       
             if insert_above:
                 cnts_hor_littles.pop(i+5)
             if insert_under:
