@@ -12,14 +12,20 @@ import cv2
 import glob
 import sys
 import numpy as np
+from PIL import Image
 
-
-show_image = False
+SHOW_IMAGE = True
+HAS_TRANSPARENT_BC = True
 
 def takeX(elem):
     return elem[0][0][0]
 
-def analyse(img, nameimg):
+def analyse(img, fullname, nameimg):
+    if HAS_TRANSPARENT_BC:
+        img_tr = Image.open(fullname)
+        background = Image.new("RGB", img_tr.size, (255, 255, 255))
+        background.paste(img_tr, mask=img_tr.split()[3])
+        img = np.array(background)
     # we resize because the image was too big
     img = cv2.resize(img,(int(img.shape[1]*0.4),int(img.shape[0]*0.4)),interpolation = cv2.INTER_AREA)
     result_intermediate = img.copy()
@@ -221,7 +227,7 @@ def analyse(img, nameimg):
         f.write(n)
     f.close()
 
-    if show_image:
+    if SHOW_IMAGE:
         cv2.imshow("image de depart", img)
         cv2.imshow('contours détéctés',result)
         cv2.imshow('contour binaire',result_binary)
@@ -237,4 +243,4 @@ if __name__ == "__main__":
         txt = txt[1].split('.')
         txt = txt[0]
         txt  = "Resultat\\" + txt
-        analyse(img, txt)
+        analyse(img, f1, txt)
