@@ -5,6 +5,7 @@ He-Arc 2020
 
 François Bouthillier de Beaumont - Roxane Carraux - Loïc Jurasz
 
+
 Programme utilisant OpenCV et développé en langage python permettant de détecter des notes dans une partition de musique
 
 Le programme pour faire les partitions est MuseScore3.
@@ -25,3 +26,8 @@ Nous détectons ensuite les contours entre les limites définies. Une fois que n
 Nous vérifions ensuite où se situe la note par rapport à nos lignes horizontales et si une petite ligne verticale en est proche.
 
 Nous écrivons ensuite dans un fichier txt les notes que nous avons repérées. Nous écrivons également avant la note (r) ou (n/b) pour dire si la note est une ronde (r) ou une blanhe/noir (n/b)
+
+## Dépendances
+Pour installer les bibliothèques nécessaires, faites la commandes suivantes : 
+
+pip install -r requirements.txt
