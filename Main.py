@@ -107,6 +107,12 @@ def analyse(img, fullname, nameimg):
     for c in cnts_hor_short_final:
         if c[0][0][1]>cnts_hor[0][0][0][1]:
             lowest_hor_line = c[0][0][1]
+    # we detect the rightest vertical line
+    rightest_vert_line = cnts_ver[-1][0][0][0]
+    for c in cnts_ver:
+        if c[0][0][0]<cnts_ver[0][0][0][0]:
+            rightest_vert_line = c[0][0][0]
+    # there is no need to detect the leftest vertical line as we'll use cnts_ver[0][0][0][0] because it's the line that we add to take out the keys
     # transform image to detect contours
     result_gray = cv2.cvtColor(result, cv2.COLOR_RGB2GRAY)
     _, result_binary = cv2.threshold(result_gray, 225, 255, cv2.THRESH_BINARY_INV)
@@ -117,11 +123,11 @@ def analyse(img, fullname, nameimg):
     contours_finals = []
     for c in contours:
         # test if contours are between our lines (first if it's not below, second if it's not higher, third not to the right, fourth to te left)
-        if not((c[0][0][1] > lowest_hor_line+20) or (c[0][0][1] < highest_hor_line-20) or (c[0][0][0] > cnts_ver[0][0][0][0]) or (c[0][0][0] < cnts_ver[-1][0][0][0])):
+        if not((c[0][0][1] > lowest_hor_line+20) or (c[0][0][1] < highest_hor_line-20) or (c[0][0][0] > cnts_ver[0][0][0][0]) or (c[0][0][0] < rightest_vert_line)):
             # we add the contours that are between our lines in contours_final
             contours_finals.append(c)
     # we draw contours final
-    cv2.drawContours(result, contours_finals, -1, (0, 0, 0), thickness=cv2.FILLED)
+    cv2.drawContours(result, contours_finals, -1, (255, 0, 0), thickness=cv2.FILLED)
 
     # we dilate the image result and erode it, we can get off of some points that were there and we have entire notes
     result_gray = cv2.cvtColor(result, cv2.COLOR_RGB2GRAY)
