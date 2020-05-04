@@ -145,7 +145,13 @@ def analyse(img, fullname, nameimg):
     notes = ['Do ','Re ','Mi ','Fa ','Sol ','La ','Si ']
     # we can know which note is which with the lines, we know that the long lines are grouped by 5
     lines = []
+    # if it's a "clé de sol" or "clé de fa" we begin with a "clé de sol" as we begin from the bottom
+    keys = 0
     for i in range(0, len(cnts_hor)-1, +5):
+        if keys != 0:
+            keys = 0
+        else :
+            keys = 2
         lines.append("\n")
         # we'll add little lines in this list
         cnts_hor_littles = cnts_hor.copy()
@@ -213,11 +219,10 @@ def analyse(img, fullname, nameimg):
                        above += 1 
                 # write in lines what notes it is
                 # ['Do','Re','Mi','Fa','Sol','La','Si']
-
                 if on_line:
-                    lines.append(notes[(2*above-2*nbLinesUnder)%7]) 
+                    lines.append(notes[((2*above-2*nbLinesUnder)+keys)%7]) 
                 else:
-                    lines.append(notes[(2*above-2*nbLinesUnder+1)%7])
+                    lines.append(notes[(2*above-2*nbLinesUnder+1+keys)%7])
                 if has_vert_line:
                     lines.append('(n/b)')
                 else:
@@ -225,7 +230,7 @@ def analyse(img, fullname, nameimg):
             if insert_above:
                 cnts_hor_littles.pop(i+5)
             if insert_under:
-                cnts_hor_littles.pop(i-1)
+                cnts_hor_littles.pop(i)
     lines.reverse()
     # write in file what are the notes
     f= open(nameimg + ".txt","w+")

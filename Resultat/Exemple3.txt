@@ -1,6 +1,6 @@
 (n/b)Do (n/b)Re (n/b)Mi (n/b)Fa (n/b)Sol (n/b)La (n/b)Si (n/b)Do (n/b)Do (n/b)Re (n/b)Mi (n/b)Fa (n/b)Sol (n/b)La (n/b)Si (n/b)Do (r)Do (r)Re (r)Mi (r)Fa (r)Sol (r)La (r)Si (r)Do 
-(r)Si (r)Si (r)Si (r)Si (r)Si (r)Sol (r)Sol (r)Sol (r)Sol (r)Do (r)Do (r)Do (r)Do (r)Do 
+(r)Re (r)Re (r)Re (r)Re (r)Re (r)Si (r)Si (r)Si (r)Si (r)Mi (r)Mi (r)Mi (r)Mi (r)Mi 
 (n/b)Mi (r)Si (r)La (r)La (r)Re (r)Fa (r)La (r)Si (r)Mi (r)Do (r)Mi (r)Sol (r)Si (r)Re 
-(r)Do (n/b)Si (n/b)Do (n/b)Re (n/b)Mi (n/b)Do (n/b)Fa (r)Fa (n/b)Sol (n/b)Do (n/b)Si (n/b)Fa (n/b)Mi (n/b)La (n/b)Mi (n/b)Mi (n/b)Do (n/b)Do (n/b)Fa (n/b)Fa (n/b)Do (n/b)Si (n/b)La (n/b)Do (n/b)Si (n/b)La (n/b)La (n/b)Si 
+(r)Mi (n/b)Re (n/b)Mi (n/b)Fa (n/b)Sol (n/b)Mi (n/b)La (r)La (n/b)Si (n/b)Mi (n/b)Re (n/b)La (n/b)Sol (n/b)Do (n/b)Sol (n/b)Sol (n/b)Mi (n/b)Mi (n/b)La (n/b)La (n/b)Mi (n/b)Re (n/b)Do (n/b)Mi (n/b)Re (n/b)Do (n/b)Do (n/b)Re 
 (r)La (r)Fa (r)Fa 
-(n/b)Re (n/b)Fa (n/b)La (n/b)La (n/b)Sol (n/b)Sol (n/b)Do 
+(n/b)Fa (n/b)La (n/b)Do (n/b)Do (n/b)Si (n/b)Si (n/b)Mi 
