@@ -2,7 +2,7 @@
 detecNote
 
 Roxane Carraux
-Francois Bouthillier de Beaumont
+Bouthillier
 Loïc Jurasz
 
 '''
@@ -16,9 +16,6 @@ from PIL import Image
 
 SHOW_IMAGE = True
 HAS_TRANSPARENT_BC = True
-
-def takeX(elem):
-    return elem[0][0][0]
 
 def analyse(img, fullname, nameimg):
     if HAS_TRANSPARENT_BC:
@@ -140,7 +137,7 @@ def analyse(img, fullname, nameimg):
     # now we only have the entire notes
     contours_notes, hierarchy = cv2.findContours(result_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     # order contours_notes from right to left
-    contours_notes.sort(key=takeX, reverse=True)
+    contours_notes.sort(key=lambda x : x[0][0][0], reverse=True)
     # we create an array with the notes in it
     notes = ['Do ','Re ','Mi ','Fa ','Sol ','La ','Si ']
     # we can know which note is which with the lines, we know that the long lines are grouped by 5
