@@ -26,6 +26,8 @@ Par défaut, le programme va afficher les résultats dans des fenêtres d'images
 
 Il est aussi important de préciser si les images ont un fond transparent. La variable [HAS_TRANSPARENT_BC](Main.py#L18) est par défaut à *True*.
 
+Pour passer à l'exemple suivant, il suffit de tapper 0 sur le clavier numérique.
+
 ## Explications
 
 Programme utilisant OpenCV et développé en langage python permettant de détecter des notes dans une partition de musique.
